@@ -54,7 +54,7 @@ public class MainManager : MonoBehaviour
             }
         }
         else if (m_GameOver)
-        {
+        {            
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -72,5 +72,12 @@ public class MainManager : MonoBehaviour
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
+
+        if (m_Points > ScoreRecord.instance.bestRecord.score)
+        {
+            ScoreRecord.instance.bestRecord.bestPlayer = ScoreRecord.instance.player;
+            ScoreRecord.instance.bestRecord.score = m_Points;
+            ScoreRecord.instance.saveRecord();
+        }
     }
 }
